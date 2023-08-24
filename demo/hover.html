@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="assets/demo.css" rel="stylesheet" />
+		<title>Demo: Hover – menu-toolkit</title>
+		<meta property="og:description" content="menu-toolkit" />
+	</head>
+	<body data-demo="hover">
+		<a class="screen-reader-text" href="#main">Skip to content</a>
+		<div class="site">
+			<header class="site-header">
+				<div class="site-header__inner">
+					<div class="site-branding">
+						<a href="#" class="site-logo" aria-label="Evermade">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 270 270" width="64" height="64">
+								<path fill="#F04D37" d="M0 0h270v270H0z"/>
+								<path fill="#fff" d="M134.748 73.7339c-13.949-.1043-27.398 5.1741-37.535 14.7314-10.1368 9.5573-16.1761 22.6537-16.8549 36.5487H189.235c-.715-13.9-6.779-26.9892-16.929-36.5417-10.15-9.5525-23.603-14.8318-37.558-14.7384Zm85.532 74.6601H79.2372c2.228 13.263 9.1042 25.307 19.4039 33.986 10.2999 8.679 23.3539 13.43 36.8379 13.406 9.931.362 19.754-2.16 28.276-7.26 8.521-5.099 15.375-12.557 19.729-21.467h32.848c-13.354 35.921-41.474 54.926-82.072 54.926-11.548.213-23.019-1.905-33.726-6.227-10.7059-4.321-20.4256-10.757-28.5743-18.921-8.1488-8.163-14.5585-17.886-18.8439-28.583-4.2854-10.697-6.358-22.148-6.0933-33.664 0-49.9195 35.7237-87.59 87.7255-87.59 50.588 0 87.238 37.476 87.238 85.743.118 5.275-.489 10.541-1.804 15.651"/>
+							</svg>
+						</a>
+					</div>
+					<nav class="site-menu" aria-label="Main">
+						<ul class="site-menu__items js-menu-toolkit" id="site-menu-items">
+							<li><a href="#">Home</a></li>
+							<li class="menu-item-has-children current-menu-item">
+								<a href="#">Work</a>
+								<ul class="sub-menu">
+									<li><a href="#websites">Websites</a></li>
+									<li><a href="#e-commerce">E-commerce</a></li>
+									<li><a href="#apps">Apps</a></li>
+								</ul>
+							</li>
+							<li class="menu-item-has-children">
+								<a href="#">Services</a>
+								<ul class="sub-menu">
+									<li><a href="#design">Design</a></li>
+									<li><a href="#development">Development</a></li>
+									<li class="menu-item-has-children">
+										<a href="#">Care</a>
+										<ul class="sub-menu">
+												<li><a href="#">Upkeep</a></li>
+												<li class="menu-item-has-children">
+													<a href="#">Monitoring</a>
+													<ul class="sub-menu">
+														<li><a href="#uptime">Uptime</a></li>
+														<li><a href="#performance">Performance</a></li>
+														<li><a href="#conversion">Conversion</a></li>
+													</ul>
+												</li>
+												<li><a href="#">Helpdesk</a></li>
+										</ul>
+									</li>
+									<li class="menu-item-has-children">
+										<a href="#">Marketing</a>
+										<ul class="sub-menu">
+												<li><a href="#analytics">Analytics</a></li>
+												<li><a href="#ab">A/B Testing</a></li>
+												<li class="menu-item-has-children">
+													<a href="#">AI tools</a>
+													<ul class="sub-menu">
+														<li><a href="#sentient">Sentient</a></li>
+														<li><a href="#non-sentient">Non-sentient</a></li>
+													</ul>
+												</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#contact-us">Contact us</a></li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+			<script type="module" src="assets/demo.js"></script>
+			<main id="main" class="site-main">
+				<article class="entry">
+					<div class="entry__content">
+						<h1>Menu from HTML: Hover Interaction</h1>
+						<p>Open menu items with hover in addition to click.</p>
+<div class="code-example">import { MenuFromHTML } from "@evermade/menu-toolkit";
+
+const menuEl = document.querySelector('.js-main-menu');
+if (menuEl) {
+	const menu = menuFromHTML(
+		menuEl,
+		{
+			action: 'hover'
+		}
+	);
+}</div>
+						<p>You can optionally set the timeout pointer can stay outside the submenu before closing.</p>
+<div class="code-example">import { menuFromHTML } from "@evermade/menu-toolkit";
+
+const menuEl = document.querySelector('.js-main-menu');
+if (menuEl) {
+	const menu = menuFromHTML(
+		menuEl,
+		{
+			action: 'hover'
+			hoverTimeout: 1000, // default is 750ms
+		}
+	);
+}</div>
+					</div>
+				</article>
+			</main>
+			<div class="site-footer">
+				<p>
+					This is demo for the
+					<a href="https://github.com/evermade/menu-toolkit">@evermade/menu-toolkit</a>.
+				</p>
+			</div>
+		</div>
+
+	</body>
+</html>

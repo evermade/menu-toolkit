@@ -1,0 +1,46 @@
+{
+	"name": "@evermade/menu-toolkit",
+	"version": "0.1.0",
+	"description": "Toolkit for developing accessible menus.",
+	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"types": "dist/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/evermade/menu-toolkit.git"
+	},
+	"keywords": [
+		"wordpress",
+		"navigation",
+		"menu",
+		"a11y"
+	],
+	"scripts": {
+		"build": "rollup -c",
+		"compress": "gzip -9 -fkc dist/index.min.js > dist/index.min.js.gz",
+		"show": "ls -lh dist/index.min.js.gz | awk '{print \"Gzipped script size:\", $5\"B\"}'",
+		"size": "npm run build -- --silent && npm run compress --silent && npm run show && rm dist/index.min.js.gz",
+		"watch": "rollup -c -w"
+	},
+	"author": "Teemu Suoranta, Evermade",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/evermade/menu-toolkit/issues"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^24.0.0",
+		"@rollup/plugin-node-resolve": "^15.0.0",
+		"@rollup/plugin-typescript": "^11.1.2",
+		"@tsconfig/recommended": "^1.0.2",
+		"@wordpress/eslint-plugin": "^14.3.0",
+		"@wordpress/prettier-config": "^2.13.0",
+		"eslint": "^8.37.0",
+		"rollup": "^2",
+		"rollup-plugin-terser": "^7.0.2",
+		"typescript": "^5.1.6"
+	},
+	"homepage": "https://github.com/evermade/menu-toolkit#readme",
+	"publishConfig": {
+		"access": "public"
+	}
+}
