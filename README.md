@@ -4,6 +4,12 @@ Menu Toolkit provides functionality to help create accessible and usable menus. 
 
 ## Menu from HTML
 
+**Demos**
+
+* ["Click" interaction](https://evermade.github.io/menu-toolkit/)
+* ["Hover" interaction](https://evermade.github.io/menu-toolkit/hover.html)
+* [Animating sub menus](https://evermade.github.io/menu-toolkit/animation.html)
+
 Function `menuFromHTML` adds accessible enhancements and events for WordPress navigation menus (although you can use it for different menus).
 
 Two different interaction modes are supported:
@@ -16,12 +22,6 @@ Things to note:
 * This function only handles the `<ul>` part of your menu. You may need additional logic for example toggles or displaying mobile menu in modal
 * It's recommended to have separate menu markup for mobile menu at least when hover is used (and regardless often different configuration makes sense for smaller screens)
 * This is not plug-and-play library and you still need to properly style the menu
-
-### Demos
-
-* "Click" interaction (menu-toolkit/demo/index.html)
-* "Hover" interaction (menu-toolkit/demo/hover.html)
-* Animating sub menus (menu-toolkit/demo/animation.html)
 
 ### Usage
 
