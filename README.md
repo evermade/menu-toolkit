@@ -44,6 +44,7 @@ if (menuEl) {
 			action: 'click'
 		}
 	);
+}
 ```
 
 ### Markup
@@ -52,28 +53,28 @@ In general it's recommended to wrap the menu in `<nav>` element but we'll show j
 
 ```html
 <ul class="js-main-menu">
-		<li><a href="/">Home</a></li>
-		<li class="menu-item-has-children">
-			<a href="#">Work</a>
-			<ul class="sub-menu">
-				<li><a href="/websites">Websites</a></li>
-				<li><a href="/e-commerce">E-commerce</a></li>
-				<li><a href="/apps">Apps</a></li>
-		</li>
-		<li class="menu-item-has-children">
-			<a href="#">Services</a>
-			<ul class="sub-menu">
-				<li><a href="/design">Design</a></li>
-				<li><a href="/development">Development</a></li>
-				<li class="menu-item-has-children">
-					<a href="#">Care</a>
-					<ul class="sub-menu">
-						<li><a href="/upkeep">Upkeep</a></li>
-						<li><a href="/monitoring">Monitoring</a></li>
-					</ul>
+	<li><a href="/">Home</a></li>
+	<li class="menu-item-has-children">
+		<a href="#">Work</a>
+		<ul class="sub-menu">
+			<li><a href="/websites">Websites</a></li>
+			<li><a href="/e-commerce">E-commerce</a></li>
+			<li><a href="/apps">Apps</a></li>
+	</li>
+	<li class="menu-item-has-children">
+		<a href="#">Services</a>
+		<ul class="sub-menu">
+			<li><a href="/design">Design</a></li>
+			<li><a href="/development">Development</a></li>
+			<li class="menu-item-has-children">
+				<a href="#">Care</a>
+				<ul class="sub-menu">
+					<li><a href="/upkeep">Upkeep</a></li>
+					<li><a href="/monitoring">Monitoring</a></li>
 				</ul>
-		</li>
-		<li><a href="/blog">Blog</a></li>
+			</ul>
+	</li>
+	<li><a href="/blog">Blog</a></li>
 </ul>
 ```
 
@@ -106,7 +107,7 @@ After (if `shouldWrapAnchorToButton` is false):
 ```html
 <li class="menu-item-has-children">
 	<a href="/services">Services</a>
-	<button aria-expanded="false" data-toggle-type="cover">
+	<button aria-expanded="false" data-toggle-type="icon">
 		<span class="screen-reader-text">Sub menu</span>
 		<svg></svg>
 	</button>
