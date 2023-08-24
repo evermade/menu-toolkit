@@ -414,14 +414,14 @@ button:focus {
 	}
 }
 
-.site-menu__items  li {
+.site-menu__items > li {
 	position: relative;
 	line-height: 1.75;
 }
 
 @media (min-width: 768px) {
-	.site-menu__items  li {
-		line-height: 1;
+	.site-menu__items >  li {
+		line-height: 1.25;
 	}
 }
 
