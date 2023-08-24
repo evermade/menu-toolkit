@@ -17,7 +17,7 @@ export default {
 		// Main files
 		{ file: 'dist/index.js', ...umd },
 		{ file: 'dist/index.esm.js', ...es },
-		{ file: 'demo/dist/menu-toolkit.esm.js', ...es },
+		{ file: 'docs/dist/menu-toolkit.esm.js', ...es },
 		// Minified versions
 		{ file: 'dist/index.min.js', ...umd, ...minify },
 		{ file: 'dist/index.esm.min.js', ...es, ...minify },
