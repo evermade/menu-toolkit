@@ -401,3 +401,11 @@ This library has taken a lot from [MEOM/navigation](https://github.com/MEOM/navi
 ## Development
 
 Install tools `npm install` and build `npm run build` or develop with `npm run watch`.
+
+Releasing new version:
+
+* Update version in `package.json`
+* Commit to master
+* Set tag with version number to git
+* Create new release in GitHub
+* NPM package is automatically published from GitHub
