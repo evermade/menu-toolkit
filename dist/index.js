@@ -122,7 +122,13 @@ button:not([disabled])
                 button.type = 'button';
                 const buttonIcon = getButtonIcon(ul, level);
                 if (shouldWrapAnchorToButton(a, level)) {
-                    button.innerHTML = `<span>${a.textContent}</span>${buttonIcon}`;
+                    const span = document.createElement('span');
+                    // Move all child nodes of `a` to the span and keep any existing event listeners
+                    while (a.childNodes.length > 0) {
+                        span.appendChild(a.childNodes[0]);
+                    }
+                    button.appendChild(span);
+                    button.insertAdjacentHTML('beforeend', buttonIcon);
                     button.setAttribute('data-toggle-type', 'cover');
                     a.after(button);
                     // Hide link in JS to avoid cumulative layout shift (CLS).
