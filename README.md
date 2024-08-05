@@ -398,6 +398,16 @@ Defaults to `null`.
 
 This library has taken a lot from [MEOM/navigation](https://github.com/MEOM/navigation). Although we have a different approach to many things, it has been a great source of inspiration and ideas.
 
+## Change log
+
+### 1.0.2
+
+Prevent double initialization of menu. This could happen by human error or by some cookie consent scripts that re-run scripts after consent is given.
+
+### 1.0.1
+
+Fix issue of shouldWrapAnchorToButton copying links content with textContent and in case link actually has some inner HTML elements those would not be copied. This is now changed so that all inner HTML elements are moved which is the appropriate thing to do.
+
 ## Development
 
 Install tools `npm install` and build `npm run build` or develop with `npm run watch`.

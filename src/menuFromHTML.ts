@@ -107,6 +107,15 @@ export default function menuFromHTML(
 	 */
 	const create = () => {
 		/**
+		 * Protect agains multiple initializations with checking data-menu="root" attribute.
+		 */
+		const isInitialized = $ulRoot.getAttribute('data-menu') === 'root';
+		if (isInitialized) {
+			console.log('menuFromHTML: Menu already initialized.', $ulRoot);
+			return;
+		}
+
+		/**
 		 * Called before the component is initialized.
 		 */
 		if (typeof settings.onBeforeCreate === 'function') {
