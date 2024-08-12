@@ -188,11 +188,15 @@ Either `click` or `hover`.
 
 Targets main `<a>` elements of menu items that have children. If using WordPress menus or WordPress-like markup, no changes needed.
 
+If you are working with mega menu where only 1st level opens anything you can set this for example: `:scope > .menu-item-has-children > a`.
+
 Defaults to `.menu-item-has-children > a`.
 
 #### subMenuListItemSelector (string)
 
 Targets main `<li>`  elements of menu items that have children. If using WordPress menus or WordPress-like markup, no changes needed.
+
+If you are working with mega menu where only 1st level opens anything you can set this for example: `:scope > .menu-item-has-children`.
 
 Defaults to `.menu-item-has-children`.
 
