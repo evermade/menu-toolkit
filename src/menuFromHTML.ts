@@ -13,6 +13,7 @@ export type MenuSettings = {
 	visuallyHiddenClass: string;
 	expandChildMenuText: string;
 	hoverTimeout: number;
+	hoverOpenDelay: number;
 	buttonIcon: ((el: El, subMenu: El, level: number) => string) | string;
 	shouldWrapAnchorToButton:
 		| ((should: boolean, anchor: El, level: number) => boolean)
@@ -72,6 +73,7 @@ export default function menuFromHTML(
 		visuallyHiddenClass: 'screen-reader-text',
 		expandChildMenuText: 'Sub menu',
 		hoverTimeout: 750,
+		hoverOpenDelay: 0,
 		buttonIcon:
 			'<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"></path></svg>',
 		shouldWrapAnchorToButton: null,
@@ -506,7 +508,19 @@ export default function menuFromHTML(
 		});
 
 		if (ul) {
-			openSubMenu(ul, event);
+		// Delay opening if there is a delay set.
+			if (settings.hoverOpenDelay === 0) {
+				openSubMenu(ul, event);
+			} else {
+				setTimeout(() => {
+					const hoveredEls = document.querySelectorAll(':hover');
+					const isHovered = Array.from(hoveredEls).some((el) => el === currentTarget || currentTarget.contains(el));
+					if (isHovered) {
+						openSubMenu(ul, event);
+					}
+				}, settings.hoverOpenDelay);
+			}
+
 		}
 	};
 

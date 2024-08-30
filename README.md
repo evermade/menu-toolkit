@@ -159,6 +159,7 @@ const menu = menuFromHTML( menuEl, {
 	visuallyHiddenClass: 'screen-reader-text',
 	expandChildMenuText: 'Sub menu',
 	hoverTimeout: 750,
+	hoverOpenDelay: 0,
 	buttonIcon:
 		'<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M17.5 11.6L12 16l-5.5-4.4.9-1.2L12 14l4.5-3.6 1 1.2z"></path></svg>',
 	shouldWrapAnchorToButton: null,
@@ -229,6 +230,12 @@ Defaults to `Sub menu`.
 Time in milliseconds to wait before closing sub menu after hover moves outside of element. This is used to prevent accidental closing of sub menus.
 
 Defaults to `750`.
+
+#### hoverOpenDelay (number)
+
+Time in milliseconds to wait before opening sub menu after hover. This is used to prevent accidental opening of sub menus and let cursor quickly move over the menu without opening it.
+
+Defaults to `0`.
 
 #### buttonIcon (string)
 
@@ -403,6 +410,10 @@ Defaults to `null`.
 This library has taken a lot from [MEOM/navigation](https://github.com/MEOM/navigation). Although we have a different approach to many things, it has been a great source of inspiration and ideas.
 
 ## Change log
+
+### 1.0.3
+
+Add support for hover open delay. This allows cursors to quickly move over the menu without opening it. This is good for huge mega menus.
 
 ### 1.0.2
 
