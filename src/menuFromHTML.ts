@@ -4,6 +4,12 @@ type El = HTMLElement;
 
 export type MenuActionType = 'click' | 'hover';
 
+// Global registry to track all menu instances
+const menuInstances: Array<{
+	element: El;
+	closeAllSubMenus: () => void;
+}> = [];
+
 export type MenuSettings = {
 	action: MenuActionType;
 	subMenuAnchorSelector: string;
@@ -237,6 +243,13 @@ export default function menuFromHTML(
 		if (isOpenSubMenu(ul)) {
 			closeSubMenu(ul, event);
 		} else {
+			// Close submenus in other menu instances
+			menuInstances.forEach((instance) => {
+				if (instance.element !== $ulRoot) {
+					instance.closeAllSubMenus();
+				}
+			});
+
 			// Get all sub menus that are not the closest sub menu or its parents.
 			const subMenusToClose = getOpenSubMenus().filter((subMenu) => {
 				return subMenu !== ul && !subMenu.contains(ul);
@@ -257,11 +270,20 @@ export default function menuFromHTML(
 	 */
 	const handleOutsideClick = (event: MouseEvent) => {
 		const target = event.target as El;
-		// Bail if clicking inside the nav.
-		if (target.closest('[data-menu="root"]')) {
+		const clickedMenu = target.closest('[data-menu="root"]') as El;
+
+		// If clicking directly on a UL element (not on interactive children), close submenus
+		if (target.tagName === 'UL' && clickedMenu === $ulRoot) {
+			closeAllSubMenus();
 			return;
 		}
 
+		// If clicking inside this menu on interactive elements, don't close its submenus
+		if (clickedMenu === $ulRoot) {
+			return;
+		}
+
+		// If clicking inside another menu or outside all menus, close this menu's submenus
 		closeAllSubMenus();
 	};
 
@@ -366,6 +388,9 @@ export default function menuFromHTML(
 						closeSubMenu(closestParentSubMenu);
 					}
 				}
+			} else {
+				// If not inside a submenu, close all open submenus in this menu
+				closeAllSubMenus();
 			}
 		}
 	};
@@ -497,17 +522,19 @@ export default function menuFromHTML(
 			return true;
 		});
 
-		// close any open sub menus that are not parents or children of the current target
-		const subMenusToClose = getOpenSubMenus().filter((subMenu) => {
-			return (
-				subMenu !== ul && !subMenu.contains(ul) && !ul.contains(subMenu)
-			);
-		});
-		subMenusToClose.forEach((subMenu) => {
-			closeSubMenu(subMenu, event);
-		});
-
 		if (ul) {
+			// close any open sub menus that are not parents or children of the current target
+			const subMenusToClose = getOpenSubMenus().filter((subMenu) => {
+				if (!subMenu) {
+					return false;
+				}
+				return (
+					subMenu !== ul && !subMenu.contains(ul) && !ul.contains(subMenu)
+				);
+			});
+			subMenusToClose.forEach((subMenu) => {
+				closeSubMenu(subMenu, event);
+			});
 		// Delay opening if there is a delay set.
 			if (settings.hoverOpenDelay === 0) {
 				openSubMenu(ul, event);
@@ -685,6 +712,12 @@ export default function menuFromHTML(
 	};
 
 	create();
+
+	// Register this menu instance in the global registry
+	menuInstances.push({
+		element: $ulRoot,
+		closeAllSubMenus,
+	});
 
 	return {
 		openSubMenu,

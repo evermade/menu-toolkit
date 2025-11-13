@@ -4,10 +4,10 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link href="assets/demo.css" rel="stylesheet" />
-		<title>Demo: Hover – menu-toolkit</title>
+		<title>Demo: Multiple – menu-toolkit</title>
 		<meta property="og:description" content="menu-toolkit" />
 	</head>
-	<body data-demo="hover">
+	<body data-demo="multiple">
 		<a class="screen-reader-text" href="#main">Skip to content</a>
 		<div class="site">
 			<header class="site-header">
@@ -20,6 +20,20 @@
 							</svg>
 						</a>
 					</div>
+					<nav class="secondary-menu" aria-label="Secondary">
+						<ul class="secondary-menu__items js-menu-toolkit-secondary" id="secondary-menu-items">
+							<li><a href="#login">Login</a></li>
+							<li class="menu-item-has-children">
+								<a href="#">Account</a>
+								<ul class="sub-menu">
+									<li><a href="#profile">Profile</a></li>
+									<li><a href="#settings">Settings</a></li>
+									<li><a href="#logout">Logout</a></li>
+								</ul>
+							</li>
+							<li><a href="#help">Help</a></li>
+						</ul>
+					</nav>
 					<nav class="site-menu" aria-label="Main">
 						<ul class="site-menu__items js-menu-toolkit" id="site-menu-items">
 							<li><a href="#">Home</a></li>
@@ -76,20 +90,8 @@
 			<main id="main" class="site-main">
 				<article class="entry">
 					<div class="entry__content">
-						<h1>Menu from HTML: Hover Interaction</h1>
-						<p>Open menu items with hover in addition to click.</p>
-<div class="code-example">import { MenuFromHTML } from "@evermade/menu-toolkit";
-
-const menuEl = document.querySelector('.js-main-menu');
-if (menuEl) {
-	const menu = menuFromHTML(
-		menuEl,
-		{
-			action: 'hover'
-		}
-	);
-}</div>
-						<p>You can optionally set the timeout pointer can stay outside the submenu before closing.</p>
+						<h1>Menu from HTML: Multiple menus</h1>
+						<p>This demo tests that multiple menus work nicely on same page.</p>
 <div class="code-example">import { menuFromHTML } from "@evermade/menu-toolkit";
 
 const menuEl = document.querySelector('.js-main-menu');
@@ -97,8 +99,17 @@ if (menuEl) {
 	const menu = menuFromHTML(
 		menuEl,
 		{
-			action: 'hover'
-			hoverTimeout: 1000, // default is 750ms
+			action: 'click'
+		}
+	);
+}
+
+const secondaryMenuEl = document.querySelector('.js-secondary-menu');
+if (secondaryMenuEl) {
+	const secondaryMenu = menuFromHTML(
+		secondaryMenuEl,
+		{
+			action: 'click'
 		}
 	);
 }</div>
@@ -112,9 +123,9 @@ if (menuEl) {
 				</p>
 				<p>
 					Other demos:
-					<a href="https://evermade.github.io/menu-toolkit/">Click</a>,
+					<a href="https://evermade.github.io/menu-toolkit/index.html">Click</a>,
+					<a href="https://evermade.github.io/menu-toolkit/hover.html">Hover</a>,
 					<a href="https://evermade.github.io/menu-toolkit/animation.html">Animation</a>
-					<a href="https://evermade.github.io/menu-toolkit/multiple.html">Multiple</a>
 				</p>
 			</div>
 		</div>

@@ -9,6 +9,7 @@ Menu Toolkit provides functionality to help create accessible and usable menus. 
 * ["Click" interaction](https://evermade.github.io/menu-toolkit/)
 * ["Hover" interaction](https://evermade.github.io/menu-toolkit/hover.html)
 * [Animating sub menus](https://evermade.github.io/menu-toolkit/animation.html)
+* [Multiple menus](https://evermade.github.io/menu-toolkit/multiple.html)
 
 Function `menuFromHTML` adds accessible enhancements and events for WordPress navigation menus (although you can use it for different menus).
 
@@ -411,6 +412,12 @@ This library has taken a lot from [MEOM/navigation](https://github.com/MEOM/navi
 
 ## Change log
 
+### 1.0.4
+
+* Fix issue where clicking on secondary menu wouldn't close open sub-menu
+* Fix issue where pressing Esc wouldn't close 1st level sub-menu
+* Fix potential type error on hovering unconventional HTML menu structures
+
 ### 1.0.3
 
 Add support for hover open delay. This allows cursors to quickly move over the menu without opening it. This is good for huge mega menus.
@@ -425,7 +432,7 @@ Fix issue of shouldWrapAnchorToButton copying links content with textContent and
 
 ## Development
 
-Install tools `npm install` and build `npm run build` or develop with `npm run watch`.
+Install tools `npm install` and build `npm run build` or develop with `npm run start`.
 
 Releasing new version:
 

@@ -30,6 +30,8 @@
         }
     }
 
+    // Global registry to track all menu instances
+    const menuInstances = [];
     const TAB_KEY = 'Tab';
     const ESC_KEY = 'Escape';
     const FOCUSABLE_ELEMENTS = `
@@ -192,6 +194,12 @@ button:not([disabled])
                 closeSubMenu(ul, event);
             }
             else {
+                // Close submenus in other menu instances
+                menuInstances.forEach((instance) => {
+                    if (instance.element !== $ulRoot) {
+                        instance.closeAllSubMenus();
+                    }
+                });
                 // Get all sub menus that are not the closest sub menu or its parents.
                 const subMenusToClose = getOpenSubMenus().filter((subMenu) => {
                     return subMenu !== ul && !subMenu.contains(ul);
@@ -211,10 +219,17 @@ button:not([disabled])
          */
         const handleOutsideClick = (event) => {
             const target = event.target;
-            // Bail if clicking inside the nav.
-            if (target.closest('[data-menu="root"]')) {
+            const clickedMenu = target.closest('[data-menu="root"]');
+            // If clicking directly on a UL element (not on interactive children), close submenus
+            if (target.tagName === 'UL' && clickedMenu === $ulRoot) {
+                closeAllSubMenus();
                 return;
             }
+            // If clicking inside this menu on interactive elements, don't close its submenus
+            if (clickedMenu === $ulRoot) {
+                return;
+            }
+            // If clicking inside another menu or outside all menus, close this menu's submenus
             closeAllSubMenus();
         };
         /**
@@ -298,6 +313,10 @@ button:not([disabled])
                             closeSubMenu(closestParentSubMenu);
                         }
                     }
+                }
+                else {
+                    // If not inside a submenu, close all open submenus in this menu
+                    closeAllSubMenus();
                 }
             }
         };
@@ -412,14 +431,17 @@ button:not([disabled])
                 // Remove this sub menu from the array.
                 return true;
             });
-            // close any open sub menus that are not parents or children of the current target
-            const subMenusToClose = getOpenSubMenus().filter((subMenu) => {
-                return (subMenu !== ul && !subMenu.contains(ul) && !ul.contains(subMenu));
-            });
-            subMenusToClose.forEach((subMenu) => {
-                closeSubMenu(subMenu, event);
-            });
             if (ul) {
+                // close any open sub menus that are not parents or children of the current target
+                const subMenusToClose = getOpenSubMenus().filter((subMenu) => {
+                    if (!subMenu) {
+                        return false;
+                    }
+                    return (subMenu !== ul && !subMenu.contains(ul) && !ul.contains(subMenu));
+                });
+                subMenusToClose.forEach((subMenu) => {
+                    closeSubMenu(subMenu, event);
+                });
                 // Delay opening if there is a delay set.
                 if (settings.hoverOpenDelay === 0) {
                     openSubMenu(ul, event);
@@ -570,6 +592,11 @@ button:not([disabled])
                 : settings.buttonIcon;
         };
         create();
+        // Register this menu instance in the global registry
+        menuInstances.push({
+            element: $ulRoot,
+            closeAllSubMenus,
+        });
         return {
             openSubMenu,
             closeSubMenu,
